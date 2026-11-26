@@ -3,304 +3,504 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f5f0">
+  <meta name="theme-color" content="#f8faff">
   <meta name="description" content="CENDRIX DIGITAL SOLUTIONS LLC is a Texas-based software development and IT consulting company building web and mobile apps, AI solutions, SaaS platforms, and cloud integrations.">
   <title>CENDRIX DIGITAL SOLUTIONS LLC | Software Development & IT Consulting</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
-      --paper: #f6f5f0;
-      --ink: #1d2924;
-      --muted: #65716a;
-      --line: #d9ddd5;
-      --green: #c8df7b;
-      --orange: #dd704f;
-      --white: #fffefa;
-      --mono: "DM Mono", monospace;
-      --sans: "DM Sans", sans-serif;
-      --display: "Manrope", sans-serif;
+      --page: #f8faff;
+      --surface: #edf2fb;
+      --card: #fff;
+      --text: #16233b;
+      --muted: #4b5c76;
+      --line: #d4deee;
+      --control-border: #6e819f;
+      --accent: #2042cc;
+      --accent-hover: #1833ad;
+      --accent-soft: #e7eeff;
+      --inverse: #12213e;
+      --on-inverse: #fff;
+      --inverse-muted: #d6e1f6;
+      --inverse-accent: #bbceff;
+      --inverse-border: #8c9fbf;
+      --caption-bg: #12213ef0;
+      --ease: 180ms ease;
+      --pad: clamp(20px, 5vw, 82px);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, Helvetica, sans-serif;
+      font-family: var(--sans);
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
+    body { margin: 0; background: var(--page); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-underline-offset: .2em; }
     button { font: inherit; }
-    .wrap { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--serif); line-height: 1.02; letter-spacing: -.035em; }
+    h1 { font-weight: 700; }
+
+    .wrap { width: min(100% - 2 * var(--pad), 1440px); margin-inline: auto; }
+
+    .skip { position: fixed; top: 10px; left: 10px; z-index: 10; background: var(--accent); color: var(--on-inverse); padding: 10px; transform: translateY(-200%); }
+    .skip:focus { transform: none; }
+
     .eyebrow {
       display: flex;
-      align-items: center;
       gap: 10px;
+      align-items: center;
       margin: 0;
-      color: var(--muted);
-      font: 11px var(--mono);
-      letter-spacing: 0;
+      color: var(--accent);
+      font-family: var(--sans);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
       text-transform: uppercase;
     }
-    .eyebrow::before { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); content: ""; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; background: currentColor; transform: rotate(45deg); }
 
-    .site-header { position: relative; z-index: 3; border-bottom: 1px solid var(--line); }
-    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; font: 800 18px var(--display); letter-spacing: 0; }
-    .brand-mark { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 7px; background: var(--ink); color: var(--green); font: 500 17px var(--mono); }
-    .brand-copy { display: flex; flex-direction: column; gap: 2px; }
-    .brand-subtitle { color: var(--muted); font: 9px var(--mono); text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 34px; color: #48554e; font-size: 13px; }
-    .nav-links a:not(.nav-cta):hover { color: var(--orange); }
-    .nav-cta, .button-dark {
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .button {
+      border-radius: 2px;
+      background: var(--accent);
+      color: var(--on-inverse);
+      border: 1px solid var(--accent);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      min-height: 44px;
-      padding: 0 17px;
-      border: 0;
-      background: var(--ink);
-      color: var(--white);
-      font-size: 12px;
-      font-weight: 600;
-      transition: background .2s ease, transform .2s ease;
+      min-height: 48px;
+      padding: 10px 19px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      transition: background var(--ease), border-color var(--ease), color var(--ease), transform var(--ease);
     }
-    .nav-cta:hover, .button-dark:hover { background: #34443b; transform: translateY(-2px); }
-    .arrow { color: var(--green); font-size: 18px; line-height: 1; }
+    .button:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .button:active { transform: translateY(1px); }
+    .button.secondary { background: transparent; border-color: var(--control-border); color: var(--text); }
+    .button.secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    .hero { padding: 72px 0 62px; overflow: hidden; }
-    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: clamp(42px, 7vw, 92px); }
-    .hero-copy { padding: 0 0 14px; animation: rise .7s both; }
-    .hero h1 { max-width: 610px; margin: 23px 0 20px; font: 600 clamp(48px, 6.1vw, 78px)/1.04 var(--display); letter-spacing: 0; }
-    .hero h1 span { color: #728844; }
-    .hero-lede { max-width: 450px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
-    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 23px; margin-top: 30px; }
-    .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
-    .text-link span { color: var(--orange); font-size: 17px; transition: transform .2s ease; }
-    .text-link:hover span { transform: translateX(4px); }
-    .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 41px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--line); background: var(--card); }
+    .header-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; text-decoration: none; color: var(--text); }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 4px; background: var(--inverse); color: var(--inverse-accent); font: 700 18px var(--serif); }
+    .brand-copy { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-name { font: 700 18px var(--serif); letter-spacing: -.02em; }
+    .brand-subtitle { color: var(--muted); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; }
+    .desktop-nav { display: flex; gap: clamp(17px, 2.7vw, 43px); }
+    .desktop-nav a { position: relative; font-size: .92rem; text-decoration: none; color: var(--muted); padding-block: 6px; }
+    .desktop-nav a::after { content: ""; position: absolute; inset: auto 0 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 190ms ease-out; }
+    .desktop-nav a:hover { color: var(--text); }
+    .desktop-nav a:hover::after, .desktop-nav a:focus-visible::after { transform: scaleX(1); }
+    .header-contact { border-radius: 2px; background: var(--inverse); border: 1px solid var(--inverse); padding: 8px 18px; color: var(--on-inverse); text-decoration: none; font-size: .92rem; font-weight: 600; white-space: nowrap; transition: background var(--ease); }
+    .header-contact:hover { background: var(--accent); }
+    .mobile-nav { display: none; }
+
+    /* Hero */
+    .home-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); margin-block: clamp(18px, 3vw, 46px) 0; border-radius: 4px; overflow: hidden; background: var(--inverse); color: var(--on-inverse); }
+    .home-hero-copy { padding: clamp(28px, 5.2vw, 80px); }
+    .home-hero h1 { font-size: clamp(2.85rem, 6vw, 6.5rem); line-height: .98; letter-spacing: -.046em; margin: 18px 0 21px; max-width: 13ch; }
+    .home-hero-copy > p:not(.eyebrow) { font-size: clamp(1.04rem, 1.55vw, 1.24rem); color: var(--inverse-muted); max-width: 44ch; }
+    .home-hero .eyebrow { color: var(--inverse-accent); }
+    .home-hero .button { background: var(--card); color: var(--inverse); border-color: var(--card); }
+    .home-hero .button:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+    .home-hero .button.secondary { background: transparent; color: var(--on-inverse); border-color: var(--inverse-border); }
+    .home-hero .button.secondary:hover { border-color: var(--card); }
+    .home-hero :focus-visible { outline-color: var(--on-inverse); }
+    .home-hero .actions { margin-top: 25px; }
+    .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 30px; color: var(--inverse-muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
     .note-lines { display: flex; gap: 3px; }
-    .note-lines i { display: block; width: 15px; height: 3px; background: var(--green); }
+    .note-lines i { display: block; width: 15px; height: 3px; background: var(--inverse-accent); }
     .note-lines i:nth-child(2) { width: 9px; opacity: .7; }
     .note-lines i:nth-child(3) { width: 4px; opacity: .45; }
+    .home-hero .hero-art { position: relative; isolation: isolate; align-self: stretch; min-height: 340px; overflow: hidden; background: var(--inverse); }
+    .home-hero .hero-image { position: absolute; inset: 0; overflow: hidden; }
+    .home-hero .hero-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 56% center; }
+    .home-hero figcaption { position: absolute; bottom: 13px; right: 13px; margin: 0; padding: 4px 8px; background: var(--caption-bg); color: var(--on-inverse); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
 
-    .hero-visual { position: relative; min-height: 490px; animation: rise .8s .12s both; }
-    .hero-image { position: absolute; inset: 0 0 28px 30px; overflow: hidden; background: #b6c0b4; }
-    .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.72); }
-    .image-wash { position: absolute; inset: 0; background: linear-gradient(145deg, rgba(28,43,34,.04), rgba(28,43,34,.25)); }
-    .image-label { position: absolute; right: 16px; bottom: 15px; color: white; font: 10px var(--mono); text-transform: uppercase; }
-    .visual-index { position: absolute; top: 0; left: 0; width: 100px; height: 100px; display: grid; place-content: center; background: var(--green); }
-    .visual-index b { font: 600 26px var(--display); }
-    .visual-index span { margin-top: 3px; font: 9px var(--mono); text-transform: uppercase; }
-    .visual-stamp { position: absolute; left: -9px; bottom: 4px; width: 142px; height: 142px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); }
-    .stamp-inner { width: 116px; height: 116px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 50%; background: var(--ink); color: var(--white); text-align: center; }
-    .stamp-inner strong { font: 600 17px var(--display); }
-    .stamp-inner small { color: #c4d2c8; font: 9px var(--mono); line-height: 1.5; text-transform: uppercase; }
+    /* Sections */
+    .section { padding-block: clamp(58px, 8vw, 116px); }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 32px; }
+    .section-head h2 { font-size: clamp(2.4rem, 5.2vw, 5.2rem); font-weight: 700; }
+    .section-head .eyebrow { margin-bottom: 14px; }
+    .band { background: var(--surface); border-block: 1px solid var(--line); }
 
-    .signal { border-block: 1px solid var(--line); }
-    .signal-inner { min-height: 92px; display: grid; grid-template-columns: 1.1fr repeat(3, 1fr); align-items: center; }
-    .signal-intro { color: var(--muted); font: 10px var(--mono); line-height: 1.6; text-transform: uppercase; }
-    .signal-item { min-height: 38px; display: flex; align-items: center; gap: 13px; padding-left: 24px; border-left: 1px solid var(--line); font: 500 13px var(--display); }
-    .signal-item span { color: var(--orange); font: 10px var(--mono); }
+    /* Services */
+    .home-service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2.7vw, 36px); }
+    .home-service-group { border-top: 2px solid var(--accent); background: var(--card); padding: clamp(17px, 2.6vw, 35px); }
+    .home-service-group .service-num { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .home-service-group h3 { font-size: clamp(1.65rem, 3vw, 2.5rem); line-height: 1.1; margin-top: 16px; }
+    .home-service-group p { color: var(--muted); margin-top: 10px; }
 
-    .section { padding: 104px 0; }
-    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 48px; }
-    .section h2 { max-width: 570px; margin: 16px 0 0; font: 600 clamp(35px, 4vw, 51px)/1.1 var(--display); letter-spacing: 0; }
-    .section-intro { max-width: 390px; margin: 0 0 4px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .service { min-height: 260px; padding: 28px 30px 28px 0; }
-    .service + .service { padding-left: 30px; border-left: 1px solid var(--line); }
-    .service-num { color: var(--orange); font: 11px var(--mono); }
-    .service h3 { margin: 42px 0 11px; font: 600 22px var(--display); }
-    .service p { max-width: 300px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    /* Approach editorial split */
+    .editorial-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 7vw, 104px); align-items: center; }
+    .editorial-figure { margin: 0; }
+    .editorial-figure img { display: block; width: 100%; height: auto; aspect-ratio: 1.38; object-fit: cover; border-radius: 4px; background: var(--surface); }
+    .editorial-figure figcaption { color: var(--muted); margin-top: 10px; font-size: .81rem; }
+    .editorial-split h2 { margin: 14px 0 18px; font-size: clamp(2.25rem, 4.6vw, 4.5rem); }
+    .lede { color: var(--muted); font-size: clamp(1.08rem, 1.8vw, 1.35rem); max-width: 50ch; }
+    .steps { margin-top: 30px; border-top: 2px solid var(--accent); }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .step-num { color: var(--accent); font-weight: 700; font-size: .95rem; }
+    .step h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); margin-bottom: 4px; }
+    .step p { color: var(--muted); font-size: .95rem; }
 
-    .approach { background: var(--ink); color: var(--white); }
-    .approach .eyebrow { color: #b5c1b9; }
-    .approach .eyebrow::before { background: var(--green); }
-    .approach-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; }
-    .approach h2 { max-width: 420px; }
-    .approach-copy { padding-top: 7px; color: #c0cbc3; font-size: 14px; line-height: 1.85; }
-    .approach-copy p { margin: 0 0 20px; }
-    .steps { margin-top: 38px; border-top: 1px solid #435149; }
-    .step { display: grid; grid-template-columns: 55px 1fr; gap: 15px; padding: 20px 0; border-bottom: 1px solid #435149; }
-    .step-num { color: var(--green); font: 11px var(--mono); }
-    .step h3 { margin: 0 0 5px; color: var(--white); font: 600 14px var(--display); }
-    .step p { margin: 0; color: #aab8af; font-size: 12px; line-height: 1.7; }
+    /* CTA */
+    .cta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 44px; background: var(--inverse); color: var(--on-inverse); border-radius: 4px; padding: clamp(24px, 4.5vw, 65px); }
+    .cta .eyebrow { color: var(--inverse-accent); margin-bottom: 14px; }
+    .cta h2 { font-size: clamp(2rem, 4.5vw, 4rem); }
+    .cta p { margin-top: 12px; color: var(--inverse-muted); max-width: 55ch; }
+    .cta .button { background: var(--card); color: var(--inverse); border-color: var(--card); white-space: nowrap; }
+    .cta .button:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+    .cta :focus-visible { outline-color: var(--on-inverse); }
 
-    .contact { padding: 89px 0 96px; }
-    .contact-band { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 30px; padding: 44px 48px; overflow: hidden; background: var(--green); }
-    .contact-band::after { position: absolute; top: -88px; right: 24%; width: 240px; height: 240px; border: 1px solid rgba(29,41,36,.12); border-radius: 50%; box-shadow: 0 0 0 28px rgba(29,41,36,.035), 0 0 0 58px rgba(29,41,36,.025); content: ""; pointer-events: none; }
-    .contact-band .eyebrow { color: #4a5942; }
-    .contact-band .eyebrow::before { background: var(--orange); }
-    .contact-band h2 { max-width: 580px; margin: 14px 0 0; font: 600 clamp(34px, 4vw, 49px)/1.08 var(--display); }
-    .contact-band .button-dark { position: relative; z-index: 1; white-space: nowrap; }
-    .site-footer { border-top: 1px solid var(--line); }
-    .footer-inner { min-height: 87px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .footer-copy { color: var(--muted); font-size: 11px; }
-    .footer-meta { display: flex; gap: 24px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--line); background: var(--surface); }
+    .footer { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) minmax(0, 1fr); gap: 24px 42px; padding: clamp(32px, 5vw, 63px) 0 20px; }
+    .footer-brand p { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+    .footer nav { display: grid; justify-items: start; align-content: start; gap: 7px; }
+    .footer nav h2 { font-family: var(--sans); font-size: 1.04rem; letter-spacing: 0; margin: 3px 0 8px; }
+    .footer nav a { font-size: .92rem; text-decoration: none; color: var(--muted); }
+    .footer nav a:hover { color: var(--text); }
+    .footer-base { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 16px; }
+    .footer-base p, .footer-base a { font-size: .88rem; color: var(--muted); }
+    .footer-base a { text-decoration: none; }
+    .footer-base a:hover { color: var(--text); }
 
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
-    @media (max-width: 800px) {
-      .wrap { width: min(100% - 40px, 600px); }
-      .nav { min-height: 68px; }
-      .nav-links { gap: 17px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      .hero { padding: 55px 0 48px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero h1 { max-width: 560px; font-size: clamp(46px, 11vw, 70px); }
-      .hero-visual { min-height: min(75vw, 450px); }
-      .hero-image { left: 22px; bottom: 24px; }
-      .visual-index { width: 82px; height: 82px; }
-      .visual-stamp { width: 125px; height: 125px; }
-      .stamp-inner { width: 102px; height: 102px; }
-      .signal-inner { grid-template-columns: 1fr 1fr; gap: 0; padding: 16px 0; }
-      .signal-intro { padding: 10px 0; }
-      .signal-item { min-height: 40px; padding-left: 14px; }
-      .section { padding: 76px 0; }
-      .section-head, .approach-grid { grid-template-columns: 1fr; gap: 20px; }
-      .section-head { margin-bottom: 32px; }
-      .service { min-height: unset; padding: 22px 18px 22px 0; }
-      .service + .service { padding-left: 18px; }
-      .service h3 { margin-top: 28px; font-size: 18px; }
-      .service p { font-size: 12px; }
-      .approach-grid { gap: 26px; }
-      .contact { padding: 62px 0 68px; }
-      .contact-band { grid-template-columns: 1fr; align-items: start; padding: 33px 28px; }
-      .contact-band::after { right: -100px; }
-      .contact-band .button-dark { justify-self: start; }
+    /* Projects */
+    .section-summary { max-width: 67ch; color: var(--muted); margin-bottom: 26px; font-size: 1.05rem; }
+    .home-work .section-head { margin-bottom: 13px; }
+    .home-projects { display: grid; grid-template-columns: minmax(0, 1.30fr) minmax(0, 1fr); gap: clamp(18px, 3.5vw, 50px); }
+    .home-project-side { display: grid; align-content: start; gap: 20px; }
+    .project { min-width: 0; }
+    .project a { display: block; height: 100%; text-decoration: none; border-bottom: 1px solid var(--line); }
+    .project-art { position: relative; display: grid; place-items: center; min-height: 200px; aspect-ratio: 1.6; overflow: hidden; border-radius: 5px; background-color: var(--accent-soft); background-image: linear-gradient(#1626450f 1px, transparent 1px), linear-gradient(90deg, #1626450f 1px, transparent 1px); background-size: 24px 24px; }
+    .project-tag { font-family: var(--serif); font-size: clamp(1.3rem, 2.8vw, 2.3rem); color: var(--accent); opacity: .55; letter-spacing: -.02em; padding: 0 10px; text-align: center; }
+    .project-copy { padding: 16px 0 23px; }
+    .project-kicker { color: var(--accent); font-size: .89rem; font-weight: bold; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+    .project-kicker span, .project-service { color: var(--muted); font-weight: normal; }
+    .project-kicker span::before { content: ""; display: inline-block; width: 12px; height: 1px; margin: 0 10px 4px 0; background: var(--control-border); }
+    .project h3 { font-size: clamp(1.52rem, 2.55vw, 2.4rem); line-height: 1.11; margin-top: 8px; }
+    .project-service { margin-top: 10px; font-size: .9rem; }
+    .project a:hover h3, .project a:focus-visible h3 { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+    .home-project-side .project a { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1fr); gap: 14px; padding-bottom: 14px; }
+    .home-project-side .project-art { min-height: 0; aspect-ratio: 1.15; align-self: start; }
+    .home-project-side .project-tag { font-size: clamp(1rem, 2vw, 1.4rem); }
+    .home-project-side .project-copy { padding: 0; }
+    .home-project-side .project h3 { font-size: clamp(1.26rem, 2.25vw, 1.8rem); margin-top: 6px; }
+    .home-project-side .project-kicker { font-size: .82rem; gap: 0 7px; }
+    .home-project-side .project-kicker span::before { width: 7px; margin-right: 6px; }
+    .home-project-side .project-service { font-size: .81rem; margin-top: 7px; }
+
+    /* Insights */
+    .featured-insight { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); margin-bottom: 24px; overflow: hidden; align-items: stretch; border-radius: 3px; background: var(--inverse); color: var(--on-inverse); }
+    .featured-insight > div { padding: clamp(23px, 4.4vw, 64px); }
+    .featured-insight .eyebrow { color: var(--inverse-accent); }
+    .featured-insight .featured-title { font-size: clamp(2rem, 4.2vw, 4rem); margin: 14px 0; max-width: 16ch; }
+    .featured-insight p:not(.eyebrow) { color: var(--inverse-muted); max-width: 53ch; margin-bottom: 22px; }
+    .featured-insight .button { background: var(--card); color: var(--inverse); border-color: var(--card); }
+    .featured-insight .button:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+    .featured-insight :focus-visible { outline-color: var(--on-inverse); }
+    .featured-insight img { display: block; width: 100%; height: 100%; min-height: 260px; object-fit: cover; background: var(--surface); }
+    .note-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .note { min-width: 0; }
+    .note a { display: block; height: 100%; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 2px; overflow: hidden; }
+    .insight-card-art { aspect-ratio: 1.78; overflow: hidden; background: var(--surface); }
+    .insight-card-art img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .insight-card-copy { padding: clamp(16px, 2.4vw, 27px); }
+    .insight-card-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 12px; font-size: .84rem; color: var(--muted); margin-bottom: 8px; }
+    .insight-card-meta span:first-child { color: var(--accent); font-weight: 700; }
+    .note h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.15; }
+    .note a:hover h3, .note a:focus-visible h3 { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+    .note p { color: var(--muted); margin-top: 10px; font-size: .95rem; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-image img { animation: hero-settle 580ms cubic-bezier(.22,.61,.36,1); }
+      .project-picture, .insight-card-art img { transition: transform 300ms cubic-bezier(.22,.61,.36,1); }
+      @media (hover: hover) {
+        .insight-card-art img { transition: transform 260ms ease-out; }
+        .note a:hover .insight-card-art img { transform: scale(1.035); }
+      }
     }
-    @media (max-width: 480px) {
-      .wrap { width: calc(100% - 36px); }
-      .brand { font-size: 18px; }
-      .nav-cta { min-height: 40px; padding: 0 12px; font-size: 11px; }
-      .hero-lede { font-size: 14px; }
-      .hero-note { margin-top: 30px; font-size: 9px; }
-      .signal-inner { grid-template-columns: 1fr 1fr; }
-      .signal-item { gap: 8px; padding-left: 10px; font-size: 11px; }
-      .signal-item span { font-size: 9px; }
-      .service-grid { grid-template-columns: 1fr; }
-      .service, .service + .service { padding: 20px 0; border-left: 0; }
-      .service + .service { border-top: 1px solid var(--line); }
-      .service h3 { margin-top: 18px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 18px 0; }
-      .footer-meta { gap: 16px; }
+    @keyframes hero-settle { from { transform: scale(1.032); } to { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+    @media (max-width: 850px) {
+      .desktop-nav { display: none; }
+      .mobile-nav { display: block; position: relative; }
+      .header-contact { margin-left: auto; }
+      .mobile-nav summary { padding: 7px 0; font-size: .94rem; font-weight: 700; cursor: pointer; }
+      .mobile-nav nav { position: absolute; top: 100%; right: 0; min-width: 200px; display: flex; flex-direction: column; background: var(--card); padding: 8px 16px 16px; border: 1px solid var(--line); border-radius: 0 0 4px 4px; }
+      .mobile-nav nav a { padding: 10px 0; text-decoration: none; color: var(--text); border-bottom: 1px solid var(--line); }
+      .mobile-nav nav a:last-child { border-bottom: 0; }
+      .home-service-grid { grid-template-columns: 1fr; }
+      .home-service-group h3 { font-size: 1.9rem; }
+    }
+    @media (max-width: 850px) {
+      .home-projects { grid-template-columns: 1fr; }
+      .home-project-side { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .home-project-side .project a { display: block; }
+      .home-project-side .project-art { aspect-ratio: 1.6; }
+      .home-project-side .project-copy { padding-top: 12px; }
+      .note-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .featured-insight { grid-template-columns: 1fr; }
+      .featured-insight img { min-height: 0; max-height: 270px; }
+    }
+    @media (max-width: 760px) {
+      .home-hero, .editorial-split { grid-template-columns: 1fr; }
+      .home-hero .hero-art { min-height: 0; aspect-ratio: 1.55; }
+      .editorial-split .editorial-figure { order: 1; }
+    }
+    @media (max-width: 590px) {
+      .home-project-side { grid-template-columns: 1fr; }
+      .note-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 590px) {
+      .header-inner { height: 63px; gap: 13px; }
+      .section-head { display: block; }
+      .section-head .button { margin-top: 20px; }
+      .footer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 540px) {
+      .home-hero h1 { font-size: clamp(2.55rem, 10vw, 4rem); }
+      .footer { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav wrap" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="CENDRIX DIGITAL SOLUTIONS LLC home"><span class="brand-mark" aria-hidden="true">C</span><span class="brand-copy">CENDRIX<span class="brand-subtitle">Digital Solutions LLC</span></span></a>
-      <div class="nav-links">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="CENDRIX DIGITAL SOLUTIONS LLC home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-copy"><span class="brand-name">CENDRIX</span><span class="brand-subtitle">Digital Solutions LLC</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
         <a href="#services">Services</a>
+        <a href="#work">Work</a>
         <a href="#approach">Approach</a>
-        <a class="nav-cta" href="mailto:contact@cendrixtech.com">Let's talk <span class="arrow" aria-hidden="true">↗</span></a>
-      </div>
-    </nav>
+        <a href="#insights">Insights</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="header-contact" href="mailto:contact@cendrixtech.com">Let's talk</a>
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#approach">Approach</a>
+          <a href="#insights">Insights</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:contact@cendrixtech.com">Let's talk</a>
+        </nav>
+      </details>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-grid wrap">
-        <div class="hero-copy">
-          <p class="eyebrow">U.S.-registered software development &amp; IT consulting</p>
-          <h1>Custom software for your next <span>big move.</span></h1>
-          <p class="hero-lede">We build web and mobile applications, AI-powered solutions, and connected cloud platforms for companies ready to work smarter and grow.</p>
-          <div class="hero-actions">
-            <a class="button-dark" href="mailto:contact@cendrixtech.com">Talk about your project <span class="arrow" aria-hidden="true">↗</span></a>
-            <a class="text-link" href="#services">Explore our services <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="hero-note"><span class="note-lines" aria-hidden="true"><i></i><i></i><i></i></span> Texas-based. Working with clients remotely.</div>
+  <main id="main" tabindex="-1">
+    <section class="wrap home-hero" id="top" aria-labelledby="home-title">
+      <div class="home-hero-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span>Software Development &amp; IT Consulting</p>
+        <h1 id="home-title">Custom software your team can run.</h1>
+        <p>We build web and mobile applications, AI-powered solutions, and connected cloud platforms for companies ready to work smarter and grow.</p>
+        <div class="actions">
+          <a class="button" href="mailto:contact@cendrixtech.com">Talk about your project</a>
+          <a class="button secondary" href="#services">Explore our services</a>
         </div>
-        <div class="hero-visual" aria-label="A software developer working at a desk">
-          <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=85" alt="Laptop and workspace on a developer's desk" fetchpriority="high">
-            <div class="image-wash"></div>
-            <span class="image-label">Build with intent / 001</span>
-          </div>
-          <div class="visual-index"><b>01</b><span>Make it matter</span></div>
-          <div class="visual-stamp" aria-hidden="true"><div class="stamp-inner"><strong>Clear</strong><small>thinking<br>to shipped</small></div></div>
+        <div class="hero-note"><span class="note-lines" aria-hidden="true"><i></i><i></i><i></i></span> Texas-based. Working with clients remotely.</div>
+      </div>
+      <figure class="hero-art">
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=85" width="1400" height="930" fetchpriority="high" alt="Laptop and workspace on a developer's desk">
         </div>
+        <figcaption>Clear thinking, shipped software</figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section" id="services" aria-labelledby="services-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span aria-hidden="true"></span>What we do</p>
+          <h2 id="services-title">Technology that fits the way you work.</h2>
+        </div>
+        <a class="button secondary" href="mailto:contact@cendrixtech.com">Start a conversation</a>
+      </div>
+      <div class="home-service-grid">
+        <article class="home-service-group">
+          <span class="service-num">01 / Applications</span>
+          <h3>Custom apps &amp; SaaS</h3>
+          <p>Build custom web and mobile applications, SaaS platforms, and internal tools around your users and business goals.</p>
+        </article>
+        <article class="home-service-group">
+          <span class="service-num">02 / Intelligence</span>
+          <h3>AI &amp; process automation</h3>
+          <p>Apply AI-powered capabilities and business process automation to reduce manual work and improve operations.</p>
+        </article>
+        <article class="home-service-group">
+          <span class="service-num">03 / Connectivity</span>
+          <h3>Cloud, APIs &amp; integration</h3>
+          <p>Connect systems through reliable API integrations, cloud services, and thoughtfully designed system architecture.</p>
+        </article>
       </div>
     </section>
 
-    <div class="signal" aria-label="Consulting capabilities">
-      <div class="signal-inner wrap">
-        <div class="signal-intro">Software and systems<br>for growing businesses</div>
-        <div class="signal-item"><span>01</span> Web &amp; mobile apps</div>
-        <div class="signal-item"><span>02</span> AI, SaaS &amp; automation</div>
-        <div class="signal-item"><span>03</span> Cloud &amp; integrations</div>
-      </div>
-    </div>
-
-    <section class="section" id="services">
-      <div class="wrap">
+    <section class="band" id="work">
+      <div class="wrap section home-work">
         <div class="section-head">
           <div>
-            <p class="eyebrow">What we do</p>
-            <h2>Technology that fits the way you work.</h2>
+            <p class="eyebrow"><span aria-hidden="true"></span>Software in practice</p>
+            <h2>The kind of work we take on.</h2>
           </div>
-          <p class="section-intro">We partner with startups, small businesses, and established companies to plan, build, and improve the software their work depends on.</p>
+          <a class="button secondary" href="mailto:contact@cendrixtech.com">Discuss a project</a>
         </div>
-        <div class="service-grid">
-          <article class="service">
-            <span class="service-num">01 / APPLICATIONS</span>
-            <h3>Custom apps &amp; SaaS</h3>
-            <p>Build custom web and mobile applications, SaaS platforms, and internal tools around your users and business goals.</p>
+        <p class="section-summary">Illustrative examples of the problems we help solve. Replace these with your own case studies as the work ships.</p>
+        <div class="home-projects">
+          <article class="project">
+            <a href="mailto:contact@cendrixtech.com">
+              <div class="project-art"><span class="project-tag" aria-hidden="true">Web &amp; mobile app</span></div>
+              <div class="project-copy">
+                <p class="project-kicker">Field operations <span>Services industry</span></p>
+                <h3>A scheduling tool a dispatch team can run on its own</h3>
+                <p class="project-service">Custom apps &amp; SaaS</p>
+              </div>
+            </a>
           </article>
-          <article class="service">
-            <span class="service-num">02 / INTELLIGENCE</span>
-            <h3>AI &amp; process automation</h3>
-            <p>Apply AI-powered capabilities and business process automation to reduce manual work and improve operations.</p>
-          </article>
-          <article class="service">
-            <span class="service-num">03 / CONNECTIVITY</span>
-            <h3>Cloud, APIs &amp; integration</h3>
-            <p>Connect systems through reliable API integrations, cloud services, and thoughtfully designed system architecture.</p>
-          </article>
+          <div class="home-project-side">
+            <article class="project">
+              <a href="mailto:contact@cendrixtech.com">
+                <div class="project-art"><span class="project-tag" aria-hidden="true">AI</span></div>
+                <div class="project-copy">
+                  <p class="project-kicker">Operations <span>Back office</span></p>
+                  <h3>Automated document intake and routing</h3>
+                  <p class="project-service">AI &amp; process automation</p>
+                </div>
+              </a>
+            </article>
+            <article class="project">
+              <a href="mailto:contact@cendrixtech.com">
+                <div class="project-art"><span class="project-tag" aria-hidden="true">Integration</span></div>
+                <div class="project-copy">
+                  <p class="project-kicker">Connected systems <span>Cloud</span></p>
+                  <h3>Linking a CRM to billing and fulfillment</h3>
+                  <p class="project-service">Cloud, APIs &amp; integration</p>
+                </div>
+              </a>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section approach" id="approach">
-      <div class="approach-grid wrap">
+    <section id="approach">
+      <div class="wrap section editorial-split">
+        <figure class="editorial-figure">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85" width="1200" height="800" loading="lazy" alt="A team collaborating around a laptop">
+          <figcaption>Clear process, practical delivery</figcaption>
+        </figure>
         <div>
-          <p class="eyebrow">How we work</p>
+          <p class="eyebrow"><span aria-hidden="true"></span>How we work</p>
           <h2>Clear process. Practical delivery.</h2>
-        </div>
-        <div class="approach-copy">
-          <p>Project engineering, consulting, integrations, and ongoing support, delivered remotely around your goals.</p>
+          <p class="lede">Project engineering, consulting, integrations, and ongoing support, delivered remotely around your goals.</p>
           <div class="steps">
-            <div class="step"><span class="step-num">01</span><div><h3>Plan</h3><p>Set goals and scope.</p></div></div>
-            <div class="step"><span class="step-num">02</span><div><h3>Build</h3><p>Develop, integrate, and keep you in the loop.</p></div></div>
-            <div class="step"><span class="step-num">03</span><div><h3>Support</h3><p>Maintain and improve your software.</p></div></div>
+            <div class="step"><span class="step-num">01</span><div><h3>Plan</h3><p>Set goals and scope together before anything is built.</p></div></div>
+            <div class="step"><span class="step-num">02</span><div><h3>Build</h3><p>Develop, integrate, and keep you in the loop with regular check-ins.</p></div></div>
+            <div class="step"><span class="step-num">03</span><div><h3>Support</h3><p>Maintain and improve your software after it ships.</p></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="contact-band wrap">
+    <section class="wrap section home-insights" id="insights" aria-labelledby="insights-title">
+      <div class="section-head">
         <div>
-          <p class="eyebrow">Let's talk</p>
-          <h2>What can we help you build?</h2>
+          <p class="eyebrow"><span aria-hidden="true"></span>Insights</p>
+          <h2 id="insights-title">Notes on building software.</h2>
         </div>
-        <a class="button-dark" href="mailto:contact@cendrixtech.com">Email us <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="featured-insight">
+        <div>
+          <p class="eyebrow">Featured guide</p>
+          <h3 class="featured-title">Planning software your team can actually run</h3>
+          <p>A short framework for scoping a first version around the outcome you want, the people who will operate it, and the constraints you already know.</p>
+          <a class="button" href="mailto:contact@cendrixtech.com">Talk it through with us</a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1320&q=85" width="1320" height="880" loading="lazy" alt="A whiteboard planning session">
+      </div>
+      <div class="note-grid">
+        <article class="note">
+          <a href="mailto:contact@cendrixtech.com">
+            <div class="insight-card-art"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=760&q=85" width="760" height="427" loading="lazy" alt=""></div>
+            <div class="insight-card-copy">
+              <p class="insight-card-meta"><span>Product</span><span>3 min read</span></p>
+              <h3>Scope a first version that ships</h3>
+              <p>Name the behavior you want to change before you list features, and the first release gets a lot smaller.</p>
+            </div>
+          </a>
+        </article>
+        <article class="note">
+          <a href="mailto:contact@cendrixtech.com">
+            <div class="insight-card-art"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=760&q=85" width="760" height="427" loading="lazy" alt=""></div>
+            <div class="insight-card-copy">
+              <p class="insight-card-meta"><span>AI &amp; automation</span><span>2 min read</span></p>
+              <h3>When automation is worth the effort</h3>
+              <p>Automate the repetitive, well-defined steps first, and keep a person on the judgment calls.</p>
+            </div>
+          </a>
+        </article>
+        <article class="note">
+          <a href="mailto:contact@cendrixtech.com">
+            <div class="insight-card-art"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=760&q=85" width="760" height="427" loading="lazy" alt=""></div>
+            <div class="insight-card-copy">
+              <p class="insight-card-meta"><span>Cloud &amp; integration</span><span>2 min read</span></p>
+              <h3>Integrating systems without the mess</h3>
+              <p>Start at the boundary with clear inputs and outputs, then change one system at a time.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="contact">
+      <div class="cta">
+        <div>
+          <p class="eyebrow"><span aria-hidden="true"></span>Let's talk</p>
+          <h2>What can we help you build?</h2>
+          <p>Bring us the workflow, what needs to improve, and any constraints you already know.</p>
+        </div>
+        <a class="button" href="mailto:contact@cendrixtech.com">Email us</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner wrap">
-      <a class="brand" href="#top" aria-label="CENDRIX DIGITAL SOLUTIONS LLC home"><span class="brand-mark" aria-hidden="true">C</span><span class="brand-copy">CENDRIX<span class="brand-subtitle">Digital Solutions LLC</span></span></a>
-      <span class="footer-copy">Texas-based. Collaborating nationwide.</span>
-      <div class="footer-meta"><span>© <span id="year"></span> CENDRIX DIGITAL SOLUTIONS LLC</span><a href="mailto:contact@cendrixtech.com">Email</a></div>
+    <div class="wrap footer">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="CENDRIX DIGITAL SOLUTIONS LLC home">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span class="brand-copy"><span class="brand-name">CENDRIX</span><span class="brand-subtitle">Digital Solutions LLC</span></span>
+        </a>
+        <p>Software development &amp; IT consulting. Texas-based, collaborating nationwide.</p>
+      </div>
+      <nav aria-labelledby="footer-explore">
+        <h2 id="footer-explore">Explore</h2>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#approach">Approach</a>
+        <a href="#insights">Insights</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <nav aria-labelledby="footer-reach">
+        <h2 id="footer-reach">Get in touch</h2>
+        <a href="mailto:contact@cendrixtech.com">contact@cendrixtech.com</a>
+      </nav>
+      <div class="footer-base">
+        <p>&copy; <span id="year"></span> CENDRIX DIGITAL SOLUTIONS LLC</p>
+        <a href="mailto:contact@cendrixtech.com">Email</a>
+      </div>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
