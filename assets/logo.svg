@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" role="img" aria-label="Senior Small Pro">
+  <style>
+    .mark { font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 900; }
+    .label { font-family: Arial, Helvetica, sans-serif; font-weight: 500; letter-spacing: 1px; }
+  </style>
+  <!-- Wordmark -->
+  <text class="mark" x="-2" y="128" font-size="150" fill="#1a07e0">S</text>
+  <text class="mark" x="96" y="128" font-size="118" fill="#2a1fd4">s</text>
+  <text class="mark" x="176" y="128" font-size="48" fill="#7c3aed" letter-spacing="-1">PRO</text>
+  <text class="mark" x="272" y="96" font-size="19" fill="#7c3aed">®</text>
+  <!-- Sub-labels -->
+  <text class="label" x="14" y="160" font-size="22" fill="#0d0d0d">SENIOR</text>
+  <text class="label" x="118" y="160" font-size="22" fill="#0d0d0d">SMALL</text>
+</svg>
